@@ -1,0 +1,9 @@
+version: '1'
+services:
+  boxingsurvey:
+    build: ./boxingapp
+    ports:
+    -	“3000:3000”
+    environment:
+    MONGODB_CONNECTION_URI: “mongodb+srv://awodi:ireniwaju148@cluster0.9nres.mongodb.net/”
+    AUTH_API_ADDRESS: “auth:3000”
