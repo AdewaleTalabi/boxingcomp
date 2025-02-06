@@ -1,0 +1,68 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: boxing-app
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: boxing-app
+  name: deployment-boxing-app
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: boxing-app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: boxing-app
+    spec:
+      containers:
+        - image: adewaletalabi/boxingappimage:latest
+          imagePullPolicy: Always
+          name: boxing-app
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MONGODB_CONNECTION_URI
+              value: "mongodb+srv://awodi:ireniwaju148@cluster0.9nres.mongodb.net/"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: boxing-app
+  name: service-boxing-app
+spec:
+  ports:
+    - port: 80
+      targetPort: 3000
+      protocol: TCP
+  type: NodePort
+  selector:
+    app.kubernetes.io/name: boxing-app
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: boxing-app
+  name: ingress-boxing-app
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+spec:
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: service-boxing-app
+                port:
+                  number: 80
