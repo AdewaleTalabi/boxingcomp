@@ -21,7 +21,7 @@ spec:
         app.kubernetes.io/name: boxing-app
     spec:
       containers:
-        - image: adewaletalabi/boxingappimage:latest
+        - image: 493682570276.dkr.ecr.us-east-1.amazonaws.com/boxing-app:latest
           imagePullPolicy: Always
           name: boxing-app
           ports:
