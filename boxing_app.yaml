@@ -2,13 +2,13 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: boxing-app
+  name: boxingapp
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: boxing-app
+  namespace: boxingapp
   name: deployment-boxing-app
 spec:
   selector:
@@ -34,7 +34,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: boxing-app
+  namespace: boxingapp
   name: service-boxing-app
 spec:
   ports:
@@ -49,7 +49,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  namespace: boxing-app
+  namespace: boxingapp
   name: ingress-boxing-app
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
