@@ -120,6 +120,6 @@ After downloading your access keys, and inserting the relevant credentials follo
 
 # **5. Create Cluster**
 
-We are now finally able to create our cluster using eksctl, in order to so we run the **following command:**
+We are now finally able to create our cluster using eksctl, in order to do so we run the **following command:**
 
 ```eksctl create cluster --name boxing-cluster --region us-east-1 --fargate```
