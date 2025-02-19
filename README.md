@@ -265,4 +265,4 @@ We now have our ALB with an assigned DNS name! Now we can check the link to see 
 
 ![](/assets/images/Imagem16.jpg)
 
-Our application is being hosted on the worker node(s), and user able to access via the link from the ALB.
+Our application is being hosted on the worker node(s), and users are able to access via the link from the ALB!
