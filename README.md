@@ -123,3 +123,39 @@ After downloading your access keys, and inserting the relevant credentials follo
 We are now finally able to create our cluster using eksctl, in order to do so we run the **following command:**
 
 ```eksctl create cluster --name boxing-cluster --region us-east-1 --fargate```
+
+This command takes a few minutes to complete 
+
+**Result**
+
+![](/assets/images/Imagem5.jpg)
+
+We now have a cluster named boxing-cluster in our AWS account
+
+![](/assets/images/Imagem6.jpg)
+
+# **6. Create Fargate Profile**
+
+Before we schedule pods on Fargate in our cluster, we need to create a Fargate profile in order to determine which pods use Fargate when they are launched. 
+
+## Fargate Profile commands
+
+```
+eksctl create fargateprofile \
+ --cluster boxing-cluster \
+--region us-east-1 \
+--name alb-boxing-app \
+--namespace boxingapp
+```
+**Result**
+
+![](/assets/images/Imagem7.jpg)
+
+We now have a fargate profile created for our cluster
+
+# **6. Run YAML File**
+
+We are now in a position to run our YAML file within our EC2 instance. The file contains all the infrastructure for our EKS cluster, ranging the number of pods needed, the container image that will be ran on the pods, the service to expose the pods to application load balancer (alb) etc.
+
+The [boxing_app.yaml](https://github.com/AdewaleTalabi/boxingcomp/blob/main/boxing_app.yaml) file
+
