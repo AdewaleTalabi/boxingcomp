@@ -153,7 +153,9 @@ eksctl create fargateprofile \
 
 We now have a fargate profile created for our cluster
 
-# **6. RUN YAML File**
+# **6. Run YAML File**
 
-We are now in a position to run our YAML within our EC2 instance. The YAML contains all the infrastructure for our EKS cluster
+We are now in a position to run our YAML file within our EC2 instance. The file contains all the infrastructure for our EKS cluster, ranging the number of pods needed, the container image that will be ran on the pods, the service to expose the pods to application load balancer (alb) etc.
+
+The [boxing_app.yaml](https://github.com/AdewaleTalabi/boxingcomp/blob/main/boxing_app.yaml) file
 
