@@ -195,3 +195,23 @@ aws iam create-policy \
 Result
 
 ![](/assets/images/Imagem10.jpg)
+
+# **8. Create IAM Role**
+
+Now that we have created our IAM  policy, we can now create an IAM role to attach the policy to
+
+```
+eksctl create iamserviceaccount \
+  --cluster=boxing-cluster \
+  --namespace=boxingapp \
+  --name=aws-load-balancer-controller \
+  --role-name AmazonEKSLoadBalancerControllerRole \
+  --attach-policy-arn=arn:aws:iam::ACCOUNT-ID-NUMBER:policy/AWSLoadBalancerControllerIAMPolicy \
+  --approve
+```
+
+Result
+
+![](/assets/images/Imagem11.jpg)
+
+IAM role now created
