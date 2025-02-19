@@ -159,3 +159,39 @@ We are now in a position to run our YAML file within our EC2 instance. The file 
 
 The [boxing_app.yaml](https://github.com/AdewaleTalabi/boxingcomp/blob/main/boxing_app.yaml) file
 
+Copying take the content of the boxing_app.yaml file and creating a file using  ```vim boxing_app.yaml``` we can then create our namespace, deployment apps, service and ingress simultaneously using ```kubectl apply -f boxing_app.yaml```
+
+**Result**
+
+![](/assets/images/Imagem8.jpg)
+
+# **7. Associate IAM OIDC Provider**
+
+In order to ensure that the infrastructure (pods, services etc.) within our cluster has appropriate access to the resources in AWS, we need to associate it to the OIDC provider. We can think of this command as a secuirty checkpoint for our cluster, helping to prevent one-size fits all permissions to AWS and therefore adhering to the principle of least privilege. 
+
+**The command required is:** 
+
+```eksctl utils associate-iam-oidc-provider --cluster boxing-cluster --approve```
+
+**Result**
+
+![](/assets/images/Imagem9.jpg)
+
+We now have an IAM Open ID Connect provider for our cluster
+
+# **8. Create IAM Policy**
+
+After creating an IAM OIDC identity provider, we must create an IAM Role. The role created determines what the pods, services, albs etc. within our cluster will actually be able to do in AWS.
+
+AWS already has a IAM policy for load-balancers that we will be using see - [here](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/install/iam_policy.json)
+
+Taking the content of the aws-load-balancer policy file and naming as iam_policy.json in our EC2 instance, we are then able to create the policy from our machine using:
+
+```
+aws iam create-policy \
+--policy-name AWSLoadBalancerControllerIAMPolicy \
+--policy-document file://iam_policy.json
+```
+Result
+
+![](/assets/images/Imagem10.jpg)
