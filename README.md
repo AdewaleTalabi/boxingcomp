@@ -185,10 +185,13 @@ After creating an IAM OIDC identity provider, we must create an IAM Role. The ro
 
 AWS already has a IAM policy for load-balancers that we will be using see - [here](https://github.com/kubernetes-sigs/aws-load-balancer-controller/blob/main/docs/install/iam_policy.json)
 
-Taking the content of the aws-load-balancer policy file and naming as iam_policy.json in our EC2 instance, we are then able to create the policy using:
+Taking the content of the aws-load-balancer policy file and naming as iam_policy.json in our EC2 instance, we are then able to create the policy from our machine using:
 
 ```
 aws iam create-policy \
 --policy-name AWSLoadBalancerControllerIAMPolicy \
 --policy-document file://iam_policy.json
 ```
+Result
+
+![](/assets/images/Imagem10.jpg)
