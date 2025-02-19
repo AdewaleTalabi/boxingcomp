@@ -28,7 +28,7 @@ spec:
             - containerPort: 3000
           env:
             - name: MONGODB_CONNECTION_URI
-              value: "mongodb+srv://awodi:ireniwaju148@cluster0.9nres.mongodb.net/"
+              value: "mongodb+srv://USERNAME:PASSWORD@cluster0.9nres.mongodb.net/"
 
 ---
 apiVersion: v1
