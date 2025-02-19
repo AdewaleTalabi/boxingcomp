@@ -215,3 +215,54 @@ Result
 ![](/assets/images/Imagem11.jpg)
 
 IAM role now created
+
+# **9. Install Helm**
+
+We are now going to install Helm, this is a package manager for Kubernetes assisting with the definition, installation and even upgrading of our Kubernetes application
+
+Helm Installation Commands
+
+```
+curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+sudo apt-get install apt-transport-https --yes
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update
+sudo apt-get install helm
+helm version
+helm repo add eks https://aws.github.io/eks-charts
+helm repo update eks
+
+```
+
+Result
+
+![](/assets/images/Imagem13.jpg)
+
+# **10. Install ALB**
+
+Now we are able to install our application load balancer (alb) to provide the public with access to our application running on our nodes that are within the private subnet(s) of our virtual private cloud.
+
+Installation commands
+
+```
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+  --namespace boxingapp \
+  --set clusterName=boxing-cluster \
+  --set serviceAccount.create=false \
+  --set serviceAccount.name=aws-load-balancer-controller \
+  --set region=us-east-1 \
+  --set vpcId=vpc-002fed1332428be21
+```
+Result
+
+![](/assets/images/Imagem14.jpg)
+
+![](/assets/images/Imagem15.jpg)
+
+We now have our ALB with an assigned DNS name! Now we can check the link to see if our kubernetes application can be accessed by the public.
+
+# **11. Check**
+
+![](/assets/images/Imagem16.jpg)
+
+Our application is being hosted on the worker node(s), and user able to access via the link from the ALB.
